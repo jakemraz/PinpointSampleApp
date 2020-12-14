@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     applicationContext,
                     AWSMobileClient.getInstance(),
                     awsConfig);
-
+            pinpointConfig.withPostNotificationsInForeground(true);
             pinpointManager = new PinpointManager(pinpointConfig);
 
             FirebaseInstanceId.getInstance().getInstanceId()
