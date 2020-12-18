@@ -43,9 +43,9 @@ public class PushListenerService extends FirebaseMessagingService {
                 .intentAction(NotificationClient.FCM_INTENT_ACTION)
                 .build();
 
-        NotificationClient.CampaignPushResult pushResult = notificationClient.handleCampaignPush(notificationDetails);
-
-        if (!NotificationClient.CampaignPushResult.NOT_HANDLED.equals(pushResult)) {
+        NotificationClient.PushResult pushResult = notificationClient.handleNotificationReceived(notificationDetails);
+        Log.v("TEST","LALALA");
+        if (!NotificationClient.PushResult.NOT_HANDLED.equals(pushResult)) {
             /**
              The push message was due to a Pinpoint campaign.
              If the app was in the background, a local notification was added
@@ -54,7 +54,7 @@ public class PushListenerService extends FirebaseMessagingService {
              for the demo, we will broadcast the notification to let the main
              activity display it in a dialog.
              */
-            if (NotificationClient.CampaignPushResult.APP_IN_FOREGROUND.equals(pushResult)) {
+            if (NotificationClient.PushResult.APP_IN_FOREGROUND.equals(pushResult)) {
                 /* Create a message that will display the raw data of the campaign push in a dialog. */
                 final HashMap<String, String> dataMap = new HashMap<>(remoteMessage.getData());
                 broadcast(remoteMessage.getFrom(), dataMap);
